@@ -1,0 +1,4 @@
+rootProject.name='rixi'
+
+include 'rixi-rest'
+include 'rixi-ui'
