@@ -1,0 +1,6 @@
+{
+  "name": "rixi",
+  "dependencies": {
+    "angular": "~1.5.2"
+  }
+}
