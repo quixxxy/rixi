@@ -1,0 +1,22 @@
+<h1>Users</h1>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td scope="row">{{$index + 1}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td><a href="#/user/{{user.id}}">details</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
