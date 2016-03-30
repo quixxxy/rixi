@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
@@ -19,6 +19,14 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         return userRepository.insert(user);
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public User updateUser(@PathVariable String id, @RequestBody User user) {
+        user.setId(id);
+        return userRepository.save(user);
+    }
+
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)

@@ -2,11 +2,11 @@
     <form ng-submit="onSubmit()">
         <div class="form-group">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="First name" value="{{user.firstName}}">
+            <input type="text" class="form-control" id="firstName" placeholder="First name" ng-model="user.firstName">
         </div>
         <div class="form-group">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Last name" value="{{user.lastName}}">
+            <input type="text" class="form-control" id="lastName" placeholder="Last name" ng-model="user.lastName">
         </div>
         <button type="submit" class="btn btn-default" ng-click="update()">Update</button>
     </form>
