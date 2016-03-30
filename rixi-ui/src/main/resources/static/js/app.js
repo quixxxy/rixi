@@ -1,4 +1,4 @@
-app = angular.module('rixi-app', ['ngRoute', 'ngResource', 'rixi-controller', 'rixi-service']);
+app = angular.module('rixi-app', ['ngRoute', 'ngResource', 'ngAnimate', 'rixi-controller', 'rixi-service']);
 
 app.config(['$routeProvider',
     function ($routeProvider) {

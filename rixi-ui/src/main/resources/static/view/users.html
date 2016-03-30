@@ -1,22 +1,60 @@
 <h1>Users</h1>
 
 <div>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Details</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="user in users">
-            <td scope="row">{{$index + 1}}</td>
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
-            <td><a href="#/user/{{user.id}}">details</a></td>
-        </tr>
-        </tbody>
-    </table>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users" class="user-repeat-animation">
+                <td scope="row">{{$index + 1}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>
+                    <a class="btn btn-info" role="button" href="#/user/{{user.id}}">Edit</a>
+                    <button type="button" class="btn btn-danger" ng-click="delete(user.id, $index)">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-user-modal-lg">Create
+        </button>
+    </div>
+    <div class="modal fade bs-user-modal-lg" tabindex="-1" role="dialog" aria-labelledby="createUserModalLabel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Create a user</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="firstName">First name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="First name"
+                                   ng-model="user.firstName">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Last name"
+                                   ng-model="user.lastName">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="create(user)">Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
