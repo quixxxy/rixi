@@ -1,19 +1,18 @@
 var ctrl = angular.module('rixi-controller', [])
 
-ctrl.controller('UserCtrl', function ($scope, $routeParams, $window, User) {
-    $scope.user = User.get({id: $routeParams.id});
-
-    $scope.update = function (user) {
-        User.update({id: user.id}, user);
-    }
-});
-
-ctrl.controller('UserListCtrl', function ($scope, User) {
+ctrl.controller('UserCtrl', function ($scope, User) {
     $scope.users = User.query();
 
     $scope.create = function (user) {
         User.save(user);
-        $scope.users.push(user);
+
+        $scope.users.push({'firstName': user.firstName, 'lastName': user.lastName});
+    }
+
+    $scope.update = function (user, id) {
+        console.log(user);
+        console.log(id);
+        User.update({id: id}, user);
     }
 
     $scope.delete = function (id, index) {

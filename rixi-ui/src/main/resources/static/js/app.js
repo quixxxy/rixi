@@ -1,17 +1,16 @@
-app = angular.module('rixi-app', ['ngRoute', 'ngResource', 'ngAnimate', 'rixi-controller', 'rixi-service']);
+app = angular.module('rixi-app', ['ngRoute', 'ngResource', 'ngAnimate', 'xeditable', 'rixi-controller', 'rixi-service']);
+
+app.run(function (editableOptions) {
+    editableOptions.theme = 'bs3';
+});
 
 app.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider
             .when('/',
             {
-                controller: 'UserListCtrl',
-                templateUrl: 'view/users.html'
-            })
-            .when('/user/:id',
-            {
                 controller: 'UserCtrl',
-                templateUrl: 'view/user.html'
+                templateUrl: 'view/users.html'
             })
             .when('/contact',
             {

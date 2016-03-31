@@ -7,6 +7,7 @@
     "jquery": "~2.2.1",
     "angular-route": "1.5.x",
     "angular-resource": "1.5.x",
-    "angular-animate": "1.5.x"
+    "angular-animate": "1.5.x",
+    "angular-xeditable": "0.1.x"
   }
 }
