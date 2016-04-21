@@ -23,7 +23,7 @@ ctrl.controller('UserCtrl', function ($scope, User) {
 
 ctrl.controller("LineCtrl", function ($scope, $http) {
 
-    $http.get('rest-rest/statistic/user').
+    $http.get('rixi-rest/statistic/user').
         success(function(data) {
             $scope.labels = data.labels;
             $scope.series = data.series;
