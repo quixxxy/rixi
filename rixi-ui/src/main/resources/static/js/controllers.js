@@ -20,3 +20,15 @@ ctrl.controller('UserCtrl', function ($scope, User) {
         $scope.users.splice(index, 1);
     }
 });
+
+ctrl.controller("LineCtrl", function ($scope, $http) {
+
+    $http.get('rest-rest/statistic/user').
+        success(function(data) {
+            $scope.labels = data.labels;
+            $scope.series = data.series;
+            $scope.data = data.data;
+        });
+
+});
+

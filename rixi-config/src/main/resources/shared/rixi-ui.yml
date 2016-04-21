@@ -1,0 +1,10 @@
+server:
+  context-path: /rixi-ui
+  port: 8081
+
+zuul:
+  routes:
+    rixi-rest:
+        path: /rixi-rest/**
+        url: rixi-rest
+        stripPrefix: false

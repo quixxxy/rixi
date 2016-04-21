@@ -1,0 +1,3 @@
+server:
+  context-path: /rixi-rest
+  port: 8082

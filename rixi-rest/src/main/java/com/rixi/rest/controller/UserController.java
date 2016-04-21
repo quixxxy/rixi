@@ -1,19 +1,14 @@
 package com.rixi.rest.controller;
 
-import java.util.List;
-
+import com.rixi.rest.model.User;
+import com.rixi.rest.service.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.rixi.rest.model.User;
-import com.rixi.rest.service.UserRepository;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -24,6 +19,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody User user) {
+        user.setCreateDate(new Date());
         return userRepository.insert(user);
     }
 
