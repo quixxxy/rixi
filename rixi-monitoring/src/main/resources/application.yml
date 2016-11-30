@@ -1,6 +1,6 @@
 spring:
   application:
-    name: rixi-rest
+    name: rixi-monitoring
   cloud:
     config:
       uri: http://localhost:8888
