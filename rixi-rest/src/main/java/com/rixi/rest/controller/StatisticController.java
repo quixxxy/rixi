@@ -5,10 +5,7 @@ import com.rixi.rest.service.StatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/statistic", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -16,10 +13,10 @@ public class StatisticController {
     @Autowired
     private StatisticService statisticService;
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/{bucket}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public UserStatistic getUserStatistic() {
-        return statisticService.getUserStatistic();
+    public UserStatistic getStatisticFor(@PathVariable String bucket) {
+        return statisticService.getStatistic(bucket);
     }
 
 }

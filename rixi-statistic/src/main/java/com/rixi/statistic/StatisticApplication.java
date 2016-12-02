@@ -1,17 +1,18 @@
-package com.rixi.rest;
+/**
+ * Copyright 2016 Expedia, Inc. All rights reserved.
+ * EXPEDIA PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package com.rixi.statistic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
-@EnableAsync
-public class RestApplication {
+public class StatisticApplication {
     public static void main(String[] args) {
-        SpringApplication.run(RestApplication.class, args);
+        SpringApplication.run(StatisticApplication.class, args);
     }
+
 }

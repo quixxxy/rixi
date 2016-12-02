@@ -1,17 +1,12 @@
 package com.rixi.rest.service;
 
-import com.rixi.rest.model.User;
 import com.rixi.rest.model.UserStatistic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 @Component
 public class StatisticService {
@@ -19,22 +14,27 @@ public class StatisticService {
     private static final int HOURS_IN_DAY = 24;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserStatisticServiceClient userStatisticServiceClient;
 
-    public UserStatistic getUserStatistic() {
+    public UserStatistic getStatistic(String bucket) {
         LocalDateTime yesterday = LocalDateTime.now().minusDays(1).truncatedTo(ChronoUnit.DAYS);
         LocalDateTime today = LocalDateTime.now().truncatedTo(ChronoUnit.DAYS);
 
-        Date yesterdayDate = Date.from(yesterday.atZone(ZoneId.systemDefault()).toInstant());
-        Date todayDate = Date.from(today.atZone(ZoneId.systemDefault()).toInstant());
+        long[][] data = new long[2][];
 
-        int[][] data = new int[2][];
+        Map<LocalDateTime, Long> viewCount = userStatisticServiceClient.getCount(bucket);
 
-        int[] yesterdaysStat = calculate(userRepository.findByCreateDateBetween(yesterdayDate, todayDate));
-        int[] todaysStat = calculate(userRepository.findByCreateDateBetween(todayDate, new Date()));
+        if (viewCount != null) {
 
-        data[0] = yesterdaysStat;
-        data[1] = todaysStat;
+            long[] yesterdaysStat = calculate(viewCount, yesterday);
+            long[] todaysStat = calculate(viewCount, today);
+
+            data[0] = yesterdaysStat;
+            data[1] = todaysStat;
+        } else {
+            data[0] = new long[HOURS_IN_DAY];;
+            data[1] = new long[HOURS_IN_DAY];;
+        }
 
         UserStatistic userStatistic = new UserStatistic();
 
@@ -57,14 +57,15 @@ public class StatisticService {
         return series;
     }
 
-    private int[] calculate(List<User> users) {
-        int[] result = new int[HOURS_IN_DAY];
-        for (User user : users) {
-            Instant instant = Instant.ofEpochMilli(user.getCreateDate().getTime());
-            LocalDateTime creationDate = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault());
+    private long[] calculate(Map<LocalDateTime, Long> viewCount, LocalDateTime date) {
+        long[] result = new long[HOURS_IN_DAY];
 
-            int hour = creationDate.getHour();
-            result[hour] = result[hour] + 1;
+        for (Map.Entry<LocalDateTime, Long> entry : viewCount.entrySet()) {
+
+            if (entry.getKey().truncatedTo(ChronoUnit.DAYS).isEqual(date)) {
+                int hour = entry.getKey().getHour();
+                result[hour] = result[hour] + entry.getValue();
+            }
         }
         return result;
     }

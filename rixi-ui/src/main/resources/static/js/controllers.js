@@ -21,9 +21,10 @@ ctrl.controller('UserCtrl', function ($scope, User) {
     }
 });
 
-ctrl.controller("LineCtrl", function ($scope, $http) {
+ctrl.controller("LineCtrl", function ($scope, $http, $route) {
+    $scope.activeTab = $route.current.$$route.activeTab;
 
-    $http.get('rixi-rest/statistic/user').
+    $http.get('rixi-rest/statistic/' + $scope.activeTab).
         success(function(data) {
             $scope.labels = data.labels;
             $scope.series = data.series;
@@ -31,4 +32,3 @@ ctrl.controller("LineCtrl", function ($scope, $http) {
         });
 
 });
-

@@ -1,6 +1,20 @@
-<h1>Statistic</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-pills nav-stacked">
+                <li ng-class="{active: activeTab == 'views'}"><a href="#statistic/views">Views</a></li>
+                <li ng-class="{active: activeTab == 'creates'}"><a href="#statistic/creates">Creates</a></li>
+                <li ng-class="{active: activeTab == 'updates'}"><a href="#statistic/updates">Updates</a></li>
+                <li ng-class="{active: activeTab == 'deletes'}"><a href="#statistic/deletes">Deletes</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Statistic for {{activeTab}}</h1>
 
-<canvas id="line" class="chart chart-line" chart-data="data"
-        chart-labels="labels" chart-legend="true" chart-series="series"
-        chart-click="onClick">
-</canvas>
+            <canvas id="line" class="chart chart-line" chart-data="data"
+                    chart-labels="labels" chart-legend="true" chart-series="series"
+                    chart-click="onClick">
+            </canvas>
+        </div>
+    </div>
+</div>

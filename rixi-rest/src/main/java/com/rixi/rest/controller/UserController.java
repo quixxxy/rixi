@@ -2,6 +2,7 @@ package com.rixi.rest.controller;
 
 import com.rixi.rest.model.User;
 import com.rixi.rest.service.UserRepository;
+import com.rixi.rest.service.UserStatisticServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,11 +16,14 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserStatisticServiceClient userStatisticServiceClient;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody User user) {
         user.setCreateDate(new Date());
+        userStatisticServiceClient.increaseCount("creates", System.currentTimeMillis());
         return userRepository.insert(user);
     }
 
@@ -27,9 +31,9 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public User updateUser(@PathVariable String id, @RequestBody User user) {
         user.setId(id);
+        userStatisticServiceClient.increaseCount("updates", System.currentTimeMillis());
         return userRepository.save(user);
     }
-
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -40,12 +44,15 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<User> getUsers() {
-        return userRepository.findAll();
+        List<User> users = userRepository.findAll();
+        userStatisticServiceClient.increaseCount("views", System.currentTimeMillis());
+        return users;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable String id) {
+        userStatisticServiceClient.increaseCount("deletes", System.currentTimeMillis());
         userRepository.delete(id);
     }
 

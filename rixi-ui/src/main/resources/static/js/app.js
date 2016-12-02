@@ -3,6 +3,7 @@ app = angular.module('rixi-app', [
     'ngResource',
     'ngAnimate',
     'xeditable',
+    'ui.bootstrap',
     'chart.js',
     'rixi-controller',
     'rixi-service'
@@ -28,10 +29,29 @@ app.config(['$routeProvider',
             {
                 templateUrl: 'view/about.html'
             })
-            .when('/statistic',
+            .when('/statistic/views',
             {
                 controller: 'LineCtrl',
-                templateUrl: 'view/statistic.html'
+                templateUrl: 'view/statistic.html',
+                activeTab: 'views'
+            })
+            .when('/statistic/creates',
+            {
+                controller: 'LineCtrl',
+                templateUrl: 'view/statistic.html',
+                activeTab: 'creates'
+            })
+            .when('/statistic/updates',
+            {
+                controller: 'LineCtrl',
+                templateUrl: 'view/statistic.html',
+                activeTab: 'updates'
+            })
+            .when('/statistic/deletes',
+            {
+                controller: 'LineCtrl',
+                templateUrl: 'view/statistic.html',
+                activeTab: 'deletes'
             })
             .otherwise({
                 redirectTo: '/'

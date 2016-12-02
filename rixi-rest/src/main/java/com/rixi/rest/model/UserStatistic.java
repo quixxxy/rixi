@@ -4,7 +4,7 @@ public class UserStatistic {
 
     private String[] labels;
     private String[] series;
-    private int[][] data;
+    private long[][] data;
 
     public String[] getLabels() {
         return labels;
@@ -22,11 +22,11 @@ public class UserStatistic {
         this.series = series;
     }
 
-    public int[][] getData() {
+    public long[][] getData() {
         return data;
     }
 
-    public void setData(int[][] data) {
+    public void setData(long[][] data) {
         this.data = data;
     }
 }
