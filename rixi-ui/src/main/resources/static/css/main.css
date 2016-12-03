@@ -73,6 +73,30 @@ body {
     display: inline-block;
     border-radius: 50%;
 }
+.alert-fixed {
+    position:absolute;
+    top: 55px;
+    left: 85%;
+    width: 15%;
+    border-radius:4px;
+    text-align: center;
+}
+
+.alert-item.ng-enter,
+.alert-item.ng-leave {
+    -webkit-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+}
+
+.alert-item.ng-enter,
+.alert-item.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+.alert-item.ng-leave,
+.alert-item.ng-enter.ng-enter-active {
+    opacity: 1;
+}
 
 /* Add animation */
 .user-repeat-animation.ng-enter.ng-enter-active,

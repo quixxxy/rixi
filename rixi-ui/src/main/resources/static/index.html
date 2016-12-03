@@ -27,7 +27,11 @@
         </div>
     </div>
 </nav>
-
+<div class="alert-fixed" ng-controller="AlertCtrl">
+    <div uib-alert ng-class="'alert-item alert-' + (alert.type || 'warning')" ng-repeat="alert in alerts" dismiss-on-timeout="3000"
+         close="alerts.splice($index, 1);">{{alert.msg}}
+    </div>
+</div>
 <div class="container">
     <div class="starter-template">
         <div ng-view></div>

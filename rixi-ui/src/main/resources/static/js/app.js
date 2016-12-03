@@ -57,3 +57,37 @@ app.config(['$routeProvider',
                 redirectTo: '/'
             });
     }]);
+
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('rixiHttpInterceptor');
+});
+
+
+app.factory('rixiHttpInterceptor', function ($q, $rootScope) {
+    return {
+        'request': function (config) {
+            return config;
+        },
+
+        'requestError': function (rejection) {
+            console.log(rejection);
+            $rootScope.alerts.push({
+                msg: 'Error: ' + rejection.statusText,
+                type: 'danger'
+            });
+            return $q.reject(rejection);
+        },
+
+        'response': function (response) {
+            return response;
+        },
+
+        'responseError': function (rejection) {
+            $rootScope.alerts.push({
+                msg: 'Error: ' + rejection.statusText,
+                type: 'danger'
+            });
+            return $q.reject(rejection);
+        }
+    };
+});
