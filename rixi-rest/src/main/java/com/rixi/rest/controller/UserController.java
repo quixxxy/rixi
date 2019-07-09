@@ -38,10 +38,10 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public User getUser(@PathVariable String id) {
-        return userRepository.findOne(id);
+        return userRepository.findById(id).get();
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<User> getUsers() {
         List<User> users = userRepository.findAll();
@@ -53,7 +53,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable String id) {
         userStatisticServiceClient.increaseCount("deletes", System.currentTimeMillis());
-        userRepository.delete(id);
+        userRepository.deleteById(id);
     }
 
 }

@@ -1,0 +1,47 @@
+version: '3'
+services:
+  rixi-config:
+    build: rixi-config
+    restart: always
+    ports:
+      - 8888:8888
+
+  rixi-registry:
+    build: rixi-registry
+    restart: always
+    ports:
+      - 8761:8761
+    depends_on:
+      - rixi-config
+
+  rixi-mongodb:
+    build: rixi-mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    depends_on:
+      - rixi-config
+
+  rixi-statistic:
+    build: rixi-statistic
+    restart: always
+    ports:
+      - 8083:8083
+    depends_on:
+      - rixi-registry
+
+  rixi-rest:
+    build: rixi-rest
+    restart: always
+    ports:
+      - 8082:8082
+    depends_on:
+      - rixi-statistic
+
+  rixi-ui:
+    build: rixi-ui
+    restart: always
+    ports:
+      - 80:8081
+    depends_on:
+      - rixi-rest

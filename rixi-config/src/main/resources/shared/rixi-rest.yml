@@ -1,3 +1,16 @@
 server:
-  context-path: /rixi-rest
   port: 8082
+  servlet:
+    context-path: /rixi-rest
+
+spring:
+  data:
+    mongodb:
+      host: rixi-mongodb
+      port: 27017
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

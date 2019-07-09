@@ -3,4 +3,5 @@ spring:
     name: rixi-statistic
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://rixi-config:8888
+      fail-fast: true

@@ -3,4 +3,4 @@ spring:
     name: rixi-monitoring
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://rixi-config:8888

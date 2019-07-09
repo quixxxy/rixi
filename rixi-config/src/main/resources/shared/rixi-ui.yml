@@ -1,10 +1,6 @@
 server:
   port: 8081
 
-ribbon:
-  ReadTimeout: 20000
-  ConnectTimeout: 20000
-
 zuul:
   routes:
     rixi-rest:

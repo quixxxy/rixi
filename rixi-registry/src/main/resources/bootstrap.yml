@@ -3,7 +3,8 @@ spring:
     name: rixi-registry
   cloud:
     config:
-      uri: http://config:8888
+      uri: http://rixi-config:8888
+      fail-fast: true
 
 eureka:
   instance:
