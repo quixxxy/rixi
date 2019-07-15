@@ -4,3 +4,17 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://rixi-registry:8761/eureka/
+
+management:
+  health:
+    refresh:
+      enabled: false
+  endpoint:
+    health:
+      show-details: ALWAYS
+      cache:
+        time-to-live: 30s
+    enabled: true
+    web:
+      exposure:
+        include: "*"

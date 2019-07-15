@@ -1,0 +1,186 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: rixi
+  name: rixi-config-deployment
+  labels:
+    app: rixi-config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rixi-config
+  template:
+    metadata:
+      labels:
+        app: rixi-config
+    spec:
+      containers:
+      - name: rixi-config
+        image: gcr.io/rixi-245618/rixi-config:latest
+        ports:
+          - containerPort: 8888
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rixi-config
+spec:
+  selector:
+    app: rixi-config
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 8888
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: rixi
+  name: rixi-registry-deployment
+  labels:
+    app: rixi-registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rixi-registry
+  template:
+    metadata:
+      labels:
+        app: rixi-registry
+    spec:
+      containers:
+        - name: rixi-registry
+          image: gcr.io/rixi-245618/rixi-registry:latest
+          ports:
+            - containerPort: 8761
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rixi-registry
+spec:
+  selector:
+    app: rixi-registry
+  ports:
+    - protocol: TCP
+      port: 8761
+      targetPort: 8761
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: rixi
+  name: rixi-mongodb-deployment
+  labels:
+    app: rixi-mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rixi-mongodb
+  template:
+    metadata:
+      labels:
+        app: rixi-mongodb
+    spec:
+      containers:
+        - name: rixi-mongodb
+          image: gcr.io/rixi-245618/rixi-mongodb:latest
+          ports:
+            - containerPort: 27017
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rixi-mongodb
+spec:
+  selector:
+    app: rixi-mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: rixi
+  name: rixi-statistic-deployment
+  labels:
+    app: rixi-statistic
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rixi-statistic
+  template:
+    metadata:
+      labels:
+        app: rixi-statistic
+    spec:
+      containers:
+        - name: rixi-statistic
+          image: gcr.io/rixi-245618/rixi-statistic:latest
+          ports:
+            - containerPort: 8083
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: rixi
+  name: rixi-rest-deployment
+  labels:
+    app: rixi-rest
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rixi-rest
+  template:
+    metadata:
+      labels:
+        app: rixi-rest
+    spec:
+      containers:
+        - name: rixi-rest
+          image: gcr.io/rixi-245618/rixi-rest:latest
+          ports:
+            - containerPort: 8082
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: rixi
+  name: rixi-ui-deployment
+  labels:
+    app: rixi-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rixi-ui
+  template:
+    metadata:
+      labels:
+        app: rixi-ui
+    spec:
+      containers:
+        - name: rixi-ui
+          image: gcr.io/rixi-245618/rixi-ui:latest
+          ports:
+            - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rixi-ui
+spec:
+  selector:
+    app: rixi-ui
+  ports:
+    - port: 80
+      targetPort: 8081
+  type: LoadBalancer
